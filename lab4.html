@@ -23,14 +23,17 @@
   <p><label><input name="dominance" type="radio" value="1" />1 Independent</label></p>
 </fieldset>
 
-<script type="text/javascript">
-	<!--
-		// Hide the button
-		SoSciTools.submitButtonsHide();
-		// After a timeout of 3 sec = 3000 ms, display the button
-		window.setTimeout(
-		  SoSciTools.submitButtonsDisplay, 3000
-	)
-// -->
-</script>
+$(document).ready(function(){
+  setTimeout(function(){
+    $('div').css('display','block');
+     }, 5000);
+});
+div {
+  width: 150px;
+  height: 150px;
+  background-color: red;
+  display: none;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div></div>
 	
