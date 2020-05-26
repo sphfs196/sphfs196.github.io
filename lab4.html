@@ -1,14 +1,11 @@
-$(document).ready(function(){
-  setTimeout(function(){
-    $('div').css('display','block');
-     }, 5000);
+$(document).ready(function() {
+  setTimeout(function() {
+    $("#proceed").show();
+  }, 5000);
 });
-div {
-  width: 150px;
-  height: 150px;
-  background-color: red;
+#proceed {
   display: none;
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div></div>
-	
+<p>You need to wait 5 before you can proceed</p>
+<button type="button" id="proceed">proceed</button>
