@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
+	<script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'>
+		$('#proceed').delay(5000).show(0);
+	</script>
+</head>
+<body>
+	<form id="mturk_form" method="post" name="mturk_form">
+		<input type="hidden" id="assignmentId" value="" name="assignmentId"/>
+
+		<h2>Which of the following best represents the color pink?</h2>
+
+		<fieldset style="font-size: 150%">
+			<p><input name="darknessVal" type="radio" value="pink" />              				<span style="background-color: pink; width: 100px; display:inline-block">&nbsp;</span></p>
+			<p><input name="darknessVal" type="radio" value="lightpink" />         				<span style="background-color: lightpink; width: 100px; display:inline-block">&nbsp;</span></p>
+			<p><label><input name="darknessVal" type="radio" value="hotpink" />           <span style="background-color: hotpink; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="deeppink" />          <span style="background-color: deeppink; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="palevioletred" />     <span style="background-color: palevioletred; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="mediumvioletred" />   <span style="background-color: mediumvioletred; width: 100px; display:inline-block">&nbsp;</span></label></p>
+		</fieldset>
+		<br>
+		<input type="submit">
+		<p>You need to wait 0 before you can proceed</p>
+		<button type="button" id="proceed" style="display: none;">proceed</button>
+		
+	</form>
+	<script language='Javascript'>turkSetAssignmentID();</script>
+</body>
+</html>
