@@ -17,7 +17,7 @@
         <h4 id="main_content"></h4>
     </div>
     <div>
-        <form onsubmit="handleSubmit(event)">
+        <form id="mturk_form" method="post" name="mturk_form" onsubmit="handleSubmit(event)">
             <label for="valence">Valence:</label>
 
             <select id="valence">
@@ -45,7 +45,8 @@
               <option value="2"> 2 Powerful</option>
               <option value="1"> 1 Independent</option>
             </select>
-            <button type="submit">Submit</button>
+            <input type="submit" id="submit" disabled>
+            <!-- <button type="submit" id="submit">Submit</button> -->
 
         </form>
     </div>
@@ -75,8 +76,15 @@
         }
         onLoad()
         let interval = setInterval(function() {
-            countdown.innerHTML -= 1
-            if (countdown.innerHTML < 0) countdown.innerHTML = 0
+
+            if (countdown.innerHTML <= 0) {
+                document.getElementById('submit').disabled = false
+                countdown.innerHTML = 0
+            } else {
+                document.getElementById('submit').disabled = true
+                countdown.innerHTML -= 1
+            }
+
         }, 1000);
 
         function timeVerify() {
@@ -96,23 +104,24 @@
                 //console.log(event)
                 //Verify the time.
             if (timeVerify()) {
-                let valence = document.getElementById('valence').value
-                let arousal = document.getElementById('arousal').value
-                let dominance = document.getElementById('dominance').value
-                const resultJSON = {
-                    //userid: default as 0
-                    userid: 0,
-                    valence: valence,
-                    arousal: arousal,
-                    dominance: dominance
-                }
+                turkSetAssignmentID('myform', 'submit')
+                    //let valence = document.getElementById('valence').value
+                    //let arousal = document.getElementById('arousal').value
+                    //let dominance = document.getElementById('dominance').value
+                    //const resultJSON = {
+                    ////userid: default as 0
+                    //userid: 0,
+                    //valence: valence,
+                    //arousal: arousal,
+                    //dominance: dominance
+                    //}
 
-                console.log(JSON.stringify(resultJSON))
-                data[index].comments = resultJSON
-                    //after edited: write into localstorage
-                localStorage.setItem('data', JSON.stringify(data))
-                console.log(index)
-                    //console.log(JSON.stringify(data[index]))
+                //console.log(JSON.stringify(resultJSON))
+                //data[index].comments = resultJSON
+                ////after edited: write into localstorage
+                //localStorage.setItem('data', JSON.stringify(data))
+                //console.log(index)
+                //console.log(JSON.stringify(data[index]))
             } else {
                 alert("NOT YET!")
             }
