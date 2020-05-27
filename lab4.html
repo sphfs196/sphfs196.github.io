@@ -12,6 +12,7 @@
 <body>
     <div>
         <h1>Main Content:</h1>
+        <h5 id="countdown"></h5>
         <h5 id='content_id'></h5>
         <h4 id="main_content"></h4>
     </div>
@@ -29,20 +30,20 @@
             <label for="arousal">Arousal:</label>
 
             <select id="arousal">
-              <option value="5" selected>Excited</option>
-              <option value="4">Wide-awake</option>
-              <option value="3">Neutral</option>
-              <option value="2">Dull</option>
-              <option value="1">Calm</option>
+              <option value="5" selected> 5 Excited</option>
+              <option value="4"> 4 Wide-awake</option>
+              <option value="3"> 3 Neutral</option>
+              <option value="2"> 2 Dull</option>
+              <option value="1"> 1 Calm</option>
             </select>
             <label for="dominance">Dominance:</label>
 
             <select id="dominance">
-              <option value="5" selected>Dependent</option>
-              <option value="4">Powerlessness</option>
-              <option value="3">Neutral</option>
-              <option value="2">Powerful</option>
-              <option value="1">Independent</option>
+              <option value="5" selected> 5 Dependent</option>
+              <option value="4"> 4 Powerlessness</option>
+              <option value="3"> 3 Neutral</option>
+              <option value="2"> 2 Powerful</option>
+              <option value="1"> 1 Independent</option>
             </select>
             <button type="submit">Submit</button>
 
@@ -55,7 +56,7 @@
         let index = new Number()
         localStorage.setItem('data', JSON.stringify(data))
         let localdata = JSON.parse(localStorage.getItem('data'))
-
+        let countdown = document.getElementById('countdown')
 
         function onLoad() {
             let rand = Math.floor(Math.random() * data.length)
@@ -67,31 +68,55 @@
                 content.innerHTML = localdata[rand].text
                 content_id.innerHTML = "id:" + localdata[rand].idx
                 index = rand
+
+                let strLength = Math.floor(localdata[index].text.length / 10)
+                countdown.innerHTML = strLength
             }
         }
         onLoad()
+        let interval = setInterval(function() {
+            countdown.innerHTML -= 1
+            if (countdown.innerHTML < 0) countdown.innerHTML = 0
+        }, 1000);
+
+        function timeVerify() {
+            if (countdown.innerHTML === '0') {
+                //clearInterval(interval)
+                //console.log(countdown.innerHTML)
+                return true
+            } else {
+                return false
+            }
+
+        }
 
         //handleSubmit:
         function handleSubmit(event) {
             event.preventDefault()
                 //console.log(event)
-            let valence = document.getElementById('valence').value
-            let arousal = document.getElementById('arousal').value
-            let dominance = document.getElementById('dominance').value
-            const resultJSON = {
-                //userid: default as 0
-                userid: 0,
-                valence: valence,
-                arousal: arousal,
-                dominance: dominance
+                //Verify the time.
+            if (timeVerify()) {
+                let valence = document.getElementById('valence').value
+                let arousal = document.getElementById('arousal').value
+                let dominance = document.getElementById('dominance').value
+                const resultJSON = {
+                    //userid: default as 0
+                    userid: 0,
+                    valence: valence,
+                    arousal: arousal,
+                    dominance: dominance
+                }
+
+                console.log(JSON.stringify(resultJSON))
+                data[index].comments = resultJSON
+                    //after edited: write into localstorage
+                localStorage.setItem('data', JSON.stringify(data))
+                console.log(index)
+                    //console.log(JSON.stringify(data[index]))
+            } else {
+                alert("NOT YET!")
             }
 
-            console.log(JSON.stringify(resultJSON))
-            data[index].comments = resultJSON
-                //after edited: write into localstorage
-            localStorage.setItem('data', JSON.stringify(data))
-            console.log(index)
-                //console.log(JSON.stringify(data[index]))
         }
     </script>
 </body>
