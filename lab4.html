@@ -1,103 +1,26 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
-    <script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script>
-    <script src="data.js"></script>
+	<meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
+	<script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script>
 </head>
-<script>
-</script>
+<body>
+	<form id="mturk_form" method="post" name="mturk_form">
+		<input type="hidden" id="assignmentId" value="" name="assignmentId"/>
 
-<body onload="onLoad()">
-    <div>
-        <h1>Main Content:</h1>
-        <h5 id="countdown"></h5>
-        <h5 id='content_id'></h5>
-        <h4 id="main_content"></h4>
-    </div>
-    <div>
-        <form id="mturk_form" method="post" name="mturk_form">
-            <input type="hidden" id="assignmentId" value="" name="assignmentId" />
-            <label for="valence">Valence:</label>
+		<h2>Which of the following best represents the color pink?</h2>
 
-            <select id="valence">
-              <option value=5 selected>Pleasant</option>
-              <option value=4>Pleased</option>
-              <option value=3>Neutral</option>
-              <option value=2>Unsatisfied</option>
-              <option value=1>Unpleasant</option>
-            </select>
-            <label for="arousal">Arousal:</label>
-
-            <select id="arousal">
-              <option value=" selected>Excited</option>
-              <option value=4>Wide-awake</option>
-              <option value=3>Neutral</option>
-              <option value=2>Dull</option>
-              <option value=1>Calm</option>
-            </select>
-            <label for="dominance">Dominance:</label>
-
-            <select id="dominance">
-              <option value=5 selected>Dependent</option>
-              <option value=4>Powerlessness</option>
-              <option value=3>Neutral</option>
-              <option value=2>Powerful</option>
-              <option value=1>Independent</option>
-            </select>
-            <input type="submit" id="submit" disabled>
-            <!-- <button type="submit" id="submit">Submit</button> -->
-
-        </form>
-    </div>
-
-
-    <script language='Javascript'>
-        //console.log(data[0])
-        let index = new Number()
-        let countdown = document.getElementById('countdown')
-
-        function onLoad() {
-            let rand = Math.floor(Math.random() * data.length)
-            let content = document.getElementById("main_content")
-            let content_id = document.getElementById("content_id")
-                //if already have comments: rand again.
-            if (data[rand].comments) onLoad()
-            else {
-                content.innerHTML = data[rand].text
-                content_id.innerHTML = "id:" + data[rand].idx
-                index = rand
-
-                let strLength = Math.floor(data[index].text.length / 10)
-                countdown.innerHTML = strLength
-            }
-        }
-        //onLoad()
-        let interval = setInterval(function() {
-
-            if (countdown.innerHTML <= 0) {
-                document.getElementById('submit').disabled = false
-                countdown.innerHTML = 0
-            } else {
-                document.getElementById('submit').disabled = true
-                countdown.innerHTML -= 1
-            }
-
-        }, 1000);
-
-        function timeVerify() {
-            if (countdown.innerHTML === '0') {
-                return true
-            } else {
-                return false
-            }
-        }
-        //Verify the time.
-        if (timeVerify()) {
-            turkSetAssignmentID()
-        }
-    </script>
+		<fieldset style="font-size: 150%">
+			<p><input name="darknessVal" type="radio" value="pink" />              				<span style="background-color: pink; width: 100px; display:inline-block">&nbsp;</span></p>
+			<p><input name="darknessVal" type="radio" value="lightpink" />         				<span style="background-color: lightpink; width: 100px; display:inline-block">&nbsp;</span></p>
+			<p><label><input name="darknessVal" type="radio" value="hotpink" />           <span style="background-color: hotpink; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="deeppink" />          <span style="background-color: deeppink; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="palevioletred" />     <span style="background-color: palevioletred; width: 100px; display:inline-block">&nbsp;</span></label></p>
+			<p><label><input name="darknessVal" type="radio" value="mediumvioletred" />   <span style="background-color: mediumvioletred; width: 100px; display:inline-block">&nbsp;</span></label></p>
+		</fieldset>
+		<br>
+		<input type="submit">
+	</form>
+	<script language='Javascript'>turkSetAssignmentID();</script>
 </body>
-
 </html>
