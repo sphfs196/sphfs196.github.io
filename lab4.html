@@ -7,11 +7,14 @@
 </head>
 <body onload="onLoad()">
 	<h5 id='content_id'></h5>
-	<p style="font-size: 200%"><h4 id="main_content"></h4>
+	<h4 id="main_content"></h4>
 	<form id="mturk_form" method="post" name="mturk_form">
 		<input type="hidden" id="assignmentId" value="" name="assignmentId"/>
 
-		<h2>choose the emotion after reading the above tweet :&nbsp;</h2>
+		<h2 id='tweet'> 
+		{{u}} 
+		nbsp;</h2>
+		<h4>choose the emotion after reading the above tweet :&nbsp;</h4>
 		<legend>1. Valence rating<legend>
 		  <p><label><input name="valence" type="radio" value=5 />5 Pleasant</label></p>
 		  <p><label><input name="valence" type="radio" value=4 />4 Pleased</label></p>
@@ -50,18 +53,21 @@
 
         function onLoad() {
             let rand = Math.floor(Math.random() * data.length)
-            let content = document.getElementById("main_content")
+            let content = document.getElementById('tweet')
             let content_id = document.getElementById("content_id")
+			
+			let strLength = Math.floor(content.innerHTML.length / 10)
+			countdown.innerHTML = strLength
                 //if already have comments: rand again.
-            if (data[rand].comments) onLoad()
-            else {
-                content.innerHTML = data[rand].text
-                content_id.innerHTML = "id:" + data[rand].idx
-                index = rand
+            //if (data[rand].comments) onLoad()
+            //else {
+            //    content.innerHTML = data[rand].text
+            //    content_id.innerHTML = "id:" + data[rand].idx
+            //    index = rand
 
-                let strLength = Math.floor(data[index].text.length / 10)
-                countdown.innerHTML = strLength
-            }
+            //    let strLength = Math.floor(data[index].text.length / 10)
+            //    countdown.innerHTML = strLength
+            //}
         }
         //onLoad()
         let interval = setInterval(function() {
