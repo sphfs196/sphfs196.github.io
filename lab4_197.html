@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
+	<script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script>
+	<script src="data.js"></script>
+</head>
+<body onload="onLoad()">
+	<h5 id='content_id'></h5>
+	<h4 id="main_content"></h4>
+	<form id="mturk_form" method="post" name="mturk_form">
+		<input type="hidden" id="assignmentId" value="" name="assignmentId"/>
+
+		<h2 id='tweet'>Republicans are seeing what a real leader looks like. And they’d be wise not to mess with Speaker Pelosi. She will insure a fair Senate trial. She will insure the public sees that this President has committed Abuse of Power & Obstruction of Congress. She will insure the truth. </h2>
+		<h4>choose the emotion after reading the above tweet :&nbsp;</h4>
+		<legend>1. Valence rating<legend>
+		  <p><label><input name="valence" type="radio" value=5 />5 Pleasant</label></p>
+		  <p><label><input name="valence" type="radio" value=4 />4 Pleased</label></p>
+		  <p><label><input name="valence" type="radio" value=3 />3 Neutral</label></p>
+		  <p><label><input name="valence" type="radio" value=2 />2 Unsatisfied</label></p>
+		  <p><label><input name="valence" type="radio" value=1 />1 Unpleasant</label></p>
+		
+		<p>&nbsp;</p>
+		<legend>2. Arousal rating</legend>
+		  <p><label><input name="arousal" type="radio" value=5 />5 Excited</label></p>
+		  <p><label><input name="arousal" type="radio" value=4 />4 Wide-awake</label></p>
+		  <p><label><input name="arousal" type="radio" value=3 />3 Neutral</label></p>
+		  <p><label><input name="arousal" type="radio" value=2 />2 Dull</label></p>
+		  <p><label><input name="arousal" type="radio" value=1 />1 Calm</label></p>
+		
+		<p>&nbsp;</p>
+		<legend>3. Dominance rating</legend>
+		  <p><label><input name="dominance" type="radio" value=5 />5 Dependent</label></p>
+		  <p><label><input name="dominance" type="radio" value=4 />4 Powerlessness</label></p>
+		  <p><label><input name="dominance" type="radio" value=3 />3 Neutral</label></p>
+		  <p><label><input name="dominance" type="radio" value=2 />2 Powerful</label></p>
+		  <p><label><input name="dominance" type="radio" value=1 />1 Independent</label></p>
+		
+
+		
+		<br>
+		<h5 id="countdown"></h5>
+		<input type="submit" id="submit" disabled>
+	</form>
+	<script language='Javascript'>turkSetAssignmentID();</script>
+	
+	<script language='Javascript'>
+        //console.log(data[0])
+        let index = new Number()
+        let countdown = document.getElementById('countdown')
+
+        function onLoad() {
+            let rand = Math.floor(Math.random() * data.length)
+            let content = document.getElementById('tweet')
+            let content_id = document.getElementById("content_id")
+			
+			let strLength = Math.floor(content.innerHTML.length / 10)
+			countdown.innerHTML = strLength
+                //if already have comments: rand again.
+            //if (data[rand].comments) onLoad()
+            //else {
+            //    content.innerHTML = data[rand].text
+            //    content_id.innerHTML = "id:" + data[rand].idx
+            //    index = rand
+
+            //    let strLength = Math.floor(data[index].text.length / 10)
+            //    countdown.innerHTML = strLength
+            //}
+        }
+        //onLoad()
+        let interval = setInterval(function() {
+
+            if (countdown.innerHTML <= 0) {
+                document.getElementById('submit').disabled = false
+                countdown.innerHTML = 0
+            } else {
+                document.getElementById('submit').disabled = true
+                countdown.innerHTML -= 1
+            }
+
+        }, 1000);
+
+        function timeVerify() {
+            if (countdown.innerHTML === '0') {
+                return true
+            } else {
+                return false
+            }
+        }
+        //Verify the time.
+        if (timeVerify()) {
+            turkSetAssignmentID()
+        }
+    </script>
+</body>
+</html>
